@@ -23,7 +23,7 @@ class Block {
 
   //// function
   calculateHash() {
-    return SHA256(this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
+    return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
   }
 
   ////  create difficulty
@@ -33,7 +33,7 @@ class Block {
       this.hash = this.calculateHash();
     }
 
-    console.log('Block mined: ' + this.hash)
+    // console.log('Block mined: ' + this.hash)
   }
 }
 
@@ -43,7 +43,7 @@ class Blockchain {
     this.chain = [this.createGenesisBlock]; //// init chain
     this.difficulty = 3;
     this.pendingTransaction = [];
-    this.miningReward = 50;
+    this.miningReward = 100;
   }
 
   //// init first block on chain 
@@ -122,7 +122,7 @@ console.log(`Mined block1...`)
 vuCoin.createTransaction(new Transaction('address1', 'address2', 100))
 vuCoin.createTransaction(new Transaction('address2', 'address1', 50))
 
-console.log('Stating the miner..')
+// console.log('Stating the miner..')
 vuCoin.minePendingTransactions('vu-address')
 
 console.log(`Balance of vu is ${ vuCoin.getBalanceOfAddress('vu-address') }`);
@@ -131,10 +131,10 @@ console.log(`Balance of vu is ${ vuCoin.getBalanceOfAddress('vu-address') }`);
 console.log(`Mined block2...`)
 // vuCoin.addBlock(new Block(2, '2/13/2019', { amount: 20 }));
 
-console.log('Stating the miner again..')
+// console.log('Stating the miner again..')
 vuCoin.minePendingTransactions('vu-address')
 
 console.log(`Balance of vu is ${ vuCoin.getBalanceOfAddress('vu-address') }`);
 
 // console.log(JSON.stringify(vuCoin, null, 4));
-console.log('is blockchain valid:', vuCoin.isChainValid());
+// console.log('is blockchain valid:', vuCoin.isChainValid());
